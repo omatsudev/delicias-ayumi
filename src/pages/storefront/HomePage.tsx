@@ -143,7 +143,7 @@ function TrustBand() {
         {[
           { icon: <Leaf size={18} />, title: 'Sem conservantes', sub: 'Ingredientes frescos' },
           { icon: <Truck size={18} />, title: 'Entrega em Petrópolis', sub: 'Toda quarta e sábado' },
-          { icon: <Package size={18} />, title: 'Retirada no ateliê', sub: 'Corrêas · Mosela, sem taxa' },
+          { icon: <Package size={18} />, title: 'Retirada no ateliê', sub: 'R. Manoel de França, 187 Casa B' },
           { icon: <MessageCircle size={18} />, title: 'Atendimento humano', sub: 'WhatsApp direto' },
         ].map((item) => (
           <div key={item.title} className="flex items-center gap-3">
@@ -197,7 +197,7 @@ function EncomendaSection() {
           {[
             { n: '01', t: 'Escolha', d: 'Monte sua encomenda com pelo menos 48h de antecedência.' },
             { n: '02', t: 'Pague', d: 'Pix, cartão ou na entrega — tanto faz pra gente.' },
-            { n: '03', t: 'Preparamos', d: 'Tudo feito do zero no nosso ateliê na Mosela.' },
+            { n: '03', t: 'Preparamos', d: 'Tudo feito do zero no nosso ateliê.' },
             { n: '04', t: 'Chega aí', d: 'Entrega em Petrópolis ou retirada no ateliê.' },
           ].map((s) => (
             <div

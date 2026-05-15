@@ -192,7 +192,7 @@ export function CheckoutPage() {
                       {method === 'entrega' ? 'Entrega' : 'Retirada'}
                     </span>
                     <span className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>
-                      {method === 'entrega' ? 'Taxa por bairro' : 'Qua e Sáb, 14h–18h — Mosela'}
+                      {method === 'entrega' ? 'Taxa por bairro' : 'Qua e Sáb, 14h–18h'}
                     </span>
                   </label>
                 ))}
@@ -234,7 +234,7 @@ export function CheckoutPage() {
                   <p className="font-medium mb-1" style={{ color: 'oklch(var(--c-fg))' }}>
                     Ateliê Delicias Ayumi
                   </p>
-                  <p>Mosela, Petrópolis/RJ</p>
+                  <p>R. Manoel de França, 187 Casa B · Petrópolis/RJ</p>
                   <p className="mt-1 text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>
                     Quartas e sábados, das 14h às 18h
                   </p>

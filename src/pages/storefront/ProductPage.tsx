@@ -216,7 +216,7 @@ export function ProductPage() {
                 </span>
               </div>
               <p className="text-sm font-medium" style={{ color: 'oklch(var(--c-fg))' }}>Petrópolis/RJ</p>
-              <p className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>Ou retire na Mosela</p>
+              <p className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>R. Manoel de França, 187 Casa B</p>
             </div>
           </div>
         </div>
