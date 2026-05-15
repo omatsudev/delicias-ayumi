@@ -17,9 +17,9 @@ function HeroEditorial({ onShopClick, waNumber, paragraph }: {
   paragraph: string
 }) {
   return (
-    <section className="py-12 md:py-24 px-5 md:px-12 max-w-7xl mx-auto">
+    <section className="py-8 md:py-24 px-5 md:px-12 max-w-7xl mx-auto">
       <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-10 md:gap-12 items-center">
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <span
               className="text-xs font-semibold tracking-widest uppercase"
@@ -32,7 +32,7 @@ function HeroEditorial({ onShopClick, waNumber, paragraph }: {
 
           <h1
             className="font-display leading-[0.98]"
-            style={{ fontSize: 'clamp(38px, 10vw, 84px)', fontWeight: 500, letterSpacing: '-0.025em' }}
+            style={{ fontSize: 'clamp(30px, 9vw, 84px)', fontWeight: 500, letterSpacing: '-0.025em' }}
           >
             Bolos, tortas
             <br />
