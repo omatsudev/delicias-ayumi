@@ -127,10 +127,12 @@ export function HomePage() {
   useEffect(() => {
     const repo = new SupabaseProductRepository(supabase)
     const useCase = new GetProductsUseCase(repo)
-    useCase.execute().then((data) => {
-      setProducts(data)
-      setLoading(false)
-    })
+    useCase.execute()
+      .then((data) => {
+        setProducts(data)
+      })
+      .catch((err) => console.error('Erro ao carregar produtos:', err))
+      .finally(() => setLoading(false))
   }, [])
 
   const filtered = products.filter((p) => {
