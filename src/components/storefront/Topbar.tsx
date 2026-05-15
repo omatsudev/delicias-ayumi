@@ -36,7 +36,7 @@ export function Topbar({ showAnnounce = true }: TopbarProps) {
           backgroundColor: "oklch(var(--c-bg) / 0.85)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-4 flex items-center justify-between gap-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-4 flex items-center justify-between gap-4 md:gap-6">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
             <div

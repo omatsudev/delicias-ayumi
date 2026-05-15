@@ -79,17 +79,17 @@ export function ProductPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-8">
+    <div className="max-w-7xl mx-auto px-5 md:px-12 py-6 md:py-8">
       <Link
         to="/#menu"
-        className="inline-flex items-center gap-2 text-sm mb-8 hover:opacity-70 transition-opacity"
+        className="inline-flex items-center gap-2 text-sm mb-5 md:mb-8 hover:opacity-70 transition-opacity"
         style={{ color: 'oklch(var(--c-fg-soft))' }}
       >
         <ArrowLeft size={16} />
         Voltar ao cardápio
       </Link>
 
-      <div className="grid md:grid-cols-[1.1fr_1fr] gap-12">
+      <div className="grid md:grid-cols-[1.1fr_1fr] gap-6 md:gap-12">
         <div className="flex flex-col gap-3">
           <ProductImage
             imageUrl={product.imageUrl}
@@ -122,7 +122,7 @@ export function ProductPage() {
 
           <div>
             <h1
-              className="font-display text-4xl md:text-5xl font-semibold leading-tight mb-2"
+              className="font-display text-3xl md:text-5xl font-semibold leading-tight mb-2"
               style={{ color: 'oklch(var(--c-fg))' }}
             >
               {product.name}
@@ -133,7 +133,7 @@ export function ProductPage() {
           </div>
 
           <div>
-            <span className="font-display text-4xl font-semibold" style={{ color: 'oklch(var(--c-fg))' }}>
+            <span className="font-display text-3xl md:text-4xl font-semibold" style={{ color: 'oklch(var(--c-fg))' }}>
               {brl(product.priceCents)}
             </span>
             <span className="text-sm ml-2" style={{ color: 'oklch(var(--c-fg-muted))' }}>
@@ -142,9 +142,9 @@ export function ProductPage() {
           </div>
 
           {!isOutOfStock ? (
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <div
-                className="flex items-center rounded-xl border overflow-hidden"
+                className="flex items-center justify-center rounded-xl border overflow-hidden"
                 style={{ borderColor: 'oklch(var(--c-line))' }}
               >
                 <button
@@ -223,9 +223,9 @@ export function ProductPage() {
       </div>
 
       {related.length > 0 && (
-        <section className="mt-20">
+        <section className="mt-12 md:mt-20">
           <h2
-            className="font-display text-3xl font-semibold mb-8"
+            className="font-display text-2xl md:text-3xl font-semibold mb-5 md:mb-8"
             style={{ color: 'oklch(var(--c-fg))' }}
           >
             Da mesma categoria

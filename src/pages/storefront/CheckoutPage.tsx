@@ -134,22 +134,22 @@ export function CheckoutPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-12 py-8">
+    <div className="max-w-7xl mx-auto px-5 md:px-12 py-6 md:py-8">
       <Link
         to="/carrinho"
-        className="inline-flex items-center gap-2 text-sm mb-8 hover:opacity-70 transition-opacity"
+        className="inline-flex items-center gap-2 text-sm mb-6 hover:opacity-70 transition-opacity"
         style={{ color: 'oklch(var(--c-fg-soft))' }}
       >
         <ArrowLeft size={16} />
         Voltar à sacola
       </Link>
 
-      <h1 className="font-display text-4xl font-semibold mb-8" style={{ color: 'oklch(var(--c-fg))' }}>
+      <h1 className="font-display text-3xl md:text-4xl font-semibold mb-6" style={{ color: 'oklch(var(--c-fg))' }}>
         Finalizar pedido
       </h1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid md:grid-cols-[1.5fr_1fr] gap-8 items-start">
+        <div className="grid md:grid-cols-[1.5fr_1fr] gap-6 md:gap-8 items-start">
           <div className="flex flex-col gap-5">
             <Card className="p-5">
               <h2 className="font-semibold mb-4" style={{ color: 'oklch(var(--c-fg))' }}>
@@ -177,11 +177,11 @@ export function CheckoutPage() {
               <h2 className="font-semibold mb-4" style={{ color: 'oklch(var(--c-fg))' }}>
                 Entrega ou retirada
               </h2>
-              <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-2 gap-2 mb-4">
                 {(['entrega', 'retirada'] as const).map((method) => (
                   <label
                     key={method}
-                    className="flex flex-col gap-1 p-4 rounded-xl border cursor-pointer transition-all"
+                    className="flex flex-col gap-1 p-3 md:p-4 rounded-xl border cursor-pointer transition-all"
                     style={{
                       borderColor: deliveryMethod === method ? 'oklch(var(--c-primary))' : 'oklch(var(--c-line))',
                       background: deliveryMethod === method ? 'oklch(var(--c-primary-soft))' : 'oklch(var(--c-surface))',
@@ -246,7 +246,7 @@ export function CheckoutPage() {
               <h2 className="font-semibold mb-4" style={{ color: 'oklch(var(--c-fg))' }}>
                 Pagamento
               </h2>
-              <div className="grid grid-cols-1 gap-3 mb-4">
+              <div className="grid grid-cols-1 gap-2 mb-4">
                 {[
                   { value: 'pix', label: 'Pix', sub: '5% de desconto' },
                   { value: 'cartao', label: 'Cartão', sub: 'Crédito / débito' },
@@ -254,7 +254,7 @@ export function CheckoutPage() {
                 ].map((pm) => (
                   <label
                     key={pm.value}
-                    className="flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all"
+                    className="flex items-center gap-3 p-3 md:p-4 rounded-xl border cursor-pointer transition-all"
                     style={{
                       borderColor: paymentMethod === pm.value ? 'oklch(var(--c-primary))' : 'oklch(var(--c-line))',
                       background: paymentMethod === pm.value ? 'oklch(var(--c-primary-soft))' : 'oklch(var(--c-surface))',

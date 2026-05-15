@@ -17,8 +17,8 @@ export function StorefrontLayout() {
         className="mt-10"
         style={{ background: "oklch(var(--c-fg))", color: "oklch(var(--c-bg))" }}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-12">
-          <div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16 grid grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-8 md:gap-12">
+          <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div
                 className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"

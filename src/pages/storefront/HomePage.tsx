@@ -11,14 +11,15 @@ import { Button } from '@/components/ui/Button'
 
 const CATEGORIES: ('Tudo' | ProductCategory)[] = ['Tudo', 'Bolos', 'Tortas', 'Empadões']
 
-function HeroEditorial({ onShopClick, waNumber, paragraph }: { onShopClick: () => void; waNumber: string; paragraph: string }) {
+function HeroEditorial({ onShopClick, waNumber, paragraph }: {
+  onShopClick: () => void
+  waNumber: string
+  paragraph: string
+}) {
   return (
-    <section
-      className="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto"
-      style={{ color: 'oklch(var(--c-fg))' }}
-    >
-      <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
-        <div className="flex flex-col gap-6">
+    <section className="py-12 md:py-24 px-5 md:px-12 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-10 md:gap-12 items-center">
+        <div className="flex flex-col gap-5">
           <div className="flex items-center gap-3">
             <span
               className="text-xs font-semibold tracking-widest uppercase"
@@ -29,7 +30,10 @@ function HeroEditorial({ onShopClick, waNumber, paragraph }: { onShopClick: () =
             <div className="flex-1 h-px max-w-12" style={{ background: 'oklch(var(--c-primary))' }} />
           </div>
 
-          <h1 className="font-display leading-[0.98]" style={{ fontSize: 'clamp(46px, 6vw, 84px)', fontWeight: 500, letterSpacing: '-0.025em' }}>
+          <h1
+            className="font-display leading-[0.98]"
+            style={{ fontSize: 'clamp(38px, 10vw, 84px)', fontWeight: 500, letterSpacing: '-0.025em' }}
+          >
             Bolos, tortas
             <br />
             <em
@@ -54,23 +58,24 @@ function HeroEditorial({ onShopClick, waNumber, paragraph }: { onShopClick: () =
             {paragraph}
           </p>
 
-          <div className="flex flex-wrap gap-3">
-            <Button size="lg" variant="primary" onClick={onShopClick}>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button size="lg" variant="primary" onClick={onShopClick} className="w-full sm:w-auto">
               Ver cardápio
             </Button>
             <a
               href={`https://wa.me/${waNumber}?text=Olá! Gostaria de fazer uma encomenda.`}
               target="_blank"
               rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
-              <Button size="lg" variant="ghost">
+              <Button size="lg" variant="ghost" className="w-full">
                 <MessageCircle size={18} />
                 Encomendar pelo WhatsApp
               </Button>
             </a>
           </div>
 
-          <div className="flex gap-8 pt-2">
+          <div className="flex gap-6 sm:gap-8 pt-2 flex-wrap">
             {[
               { value: '5+', label: 'anos no forno', color: 'oklch(var(--c-primary))' },
               { value: '+100', label: 'clientes em Petrópolis', color: 'oklch(var(--c-accent))' },
@@ -88,6 +93,7 @@ function HeroEditorial({ onShopClick, waNumber, paragraph }: { onShopClick: () =
           </div>
         </div>
 
+        {/* Hero image — hidden on mobile */}
         <div className="relative hidden md:block" style={{ aspectRatio: '4/5' }}>
           <div
             className="absolute inset-0 rounded-[40px]"
@@ -103,13 +109,12 @@ function HeroEditorial({ onShopClick, waNumber, paragraph }: { onShopClick: () =
               className="w-full h-full object-cover"
             />
           </div>
-
           <div
             className="absolute -bottom-4 -left-4 rounded-2xl shadow-lg p-4 flex items-center gap-3"
             style={{ background: 'oklch(var(--c-surface))' }}
           >
             <div
-              className="w-9 h-9 rounded-full flex items-center justify-center"
+              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
               style={{ background: 'oklch(var(--c-accent-soft))', color: 'oklch(var(--c-accent))' }}
             >
               ★
@@ -131,32 +136,26 @@ function HeroEditorial({ onShopClick, waNumber, paragraph }: { onShopClick: () =
 
 function TrustBand() {
   return (
-    <section
-      className="border-y"
-      style={{
-        borderColor: 'oklch(var(--c-line-soft))',
-        background: 'oklch(var(--c-surface))',
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex flex-wrap justify-around gap-5">
+    <section className="border-y" style={{ borderColor: 'oklch(var(--c-line-soft))', background: 'oklch(var(--c-surface))' }}>
+      <div className="max-w-7xl mx-auto px-5 md:px-12 py-4 grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { icon: <Leaf size={18} />, title: 'Sem conservantes', sub: 'Ingredientes frescos' },
-          { icon: <Truck size={18} />, title: 'Entrega em Petrópolis', sub: 'Toda quarta e sábado' },
-          { icon: <Package size={18} />, title: 'Retirada no ateliê', sub: 'R. Antônio Manoel de França, 187 · Corrêas' },
-          { icon: <MessageCircle size={18} />, title: 'Atendimento humano', sub: 'WhatsApp direto' },
+          { icon: <Leaf size={16} />, title: 'Sem conservantes', sub: 'Ingredientes frescos' },
+          { icon: <Truck size={16} />, title: 'Entrega em Petrópolis', sub: 'Quarta e sábado' },
+          { icon: <Package size={16} />, title: 'Retirada no ateliê', sub: 'Corrêas · sem taxa' },
+          { icon: <MessageCircle size={16} />, title: 'Atendimento humano', sub: 'WhatsApp direto' },
         ].map((item) => (
-          <div key={item.title} className="flex items-center gap-3">
+          <div key={item.title} className="flex items-center gap-2.5">
             <div
-              className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+              className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
               style={{ background: 'oklch(var(--c-bg))', color: 'oklch(var(--c-primary))' }}
             >
               {item.icon}
             </div>
             <div>
-              <p className="text-sm font-semibold" style={{ color: 'oklch(var(--c-fg))' }}>
+              <p className="text-xs font-semibold leading-tight" style={{ color: 'oklch(var(--c-fg))' }}>
                 {item.title}
               </p>
-              <p className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>
+              <p className="text-[11px]" style={{ color: 'oklch(var(--c-fg-muted))' }}>
                 {item.sub}
               </p>
             </div>
@@ -169,30 +168,17 @@ function TrustBand() {
 
 function EncomendaSection() {
   return (
-    <section
-      id="encomendas"
-      className="border-y"
-      style={{
-        borderColor: 'oklch(var(--c-line-soft))',
-        background: 'oklch(var(--c-surface))',
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
-        <div className="text-center mb-12">
-          <p
-            className="text-xs font-semibold tracking-widest uppercase mb-2"
-            style={{ color: 'oklch(var(--c-primary))' }}
-          >
+    <section id="encomendas" className="border-y" style={{ borderColor: 'oklch(var(--c-line-soft))', background: 'oklch(var(--c-surface))' }}>
+      <div className="max-w-7xl mx-auto px-5 md:px-12 py-14 md:py-20">
+        <div className="text-center mb-10">
+          <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: 'oklch(var(--c-primary))' }}>
             COMO FUNCIONA
           </p>
-          <h2
-            className="text-h2-fluid font-display font-semibold"
-            style={{ color: 'oklch(var(--c-fg))' }}
-          >
+          <h2 className="text-h2-fluid font-display font-semibold" style={{ color: 'oklch(var(--c-fg))' }}>
             Da nossa cozinha pra sua mesa
           </h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { n: '01', t: 'Escolha', d: 'Monte sua encomenda com pelo menos 48h de antecedência.' },
             { n: '02', t: 'Pague', d: 'Pix, cartão ou na entrega — tanto faz pra gente.' },
@@ -201,25 +187,19 @@ function EncomendaSection() {
           ].map((s) => (
             <div
               key={s.n}
-              className="rounded-2xl p-6 border"
-              style={{
-                background: 'oklch(var(--c-bg))',
-                borderColor: 'oklch(var(--c-line-soft))',
-              }}
+              className="rounded-2xl p-4 md:p-6 border"
+              style={{ background: 'oklch(var(--c-bg))', borderColor: 'oklch(var(--c-line-soft))' }}
             >
               <div
-                className="font-display text-4xl font-semibold leading-none mb-4"
+                className="font-display text-3xl md:text-4xl font-semibold leading-none mb-3"
                 style={{ color: 'oklch(var(--c-primary))', letterSpacing: '-0.02em' }}
               >
                 {s.n}
               </div>
-              <h4
-                className="font-display text-xl font-semibold mb-2"
-                style={{ color: 'oklch(var(--c-fg))' }}
-              >
+              <h4 className="font-display text-lg md:text-xl font-semibold mb-1.5" style={{ color: 'oklch(var(--c-fg))' }}>
                 {s.t}
               </h4>
-              <p className="text-sm leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+              <p className="text-xs md:text-sm leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
                 {s.d}
               </p>
             </div>
@@ -240,11 +220,8 @@ export function HomePage() {
 
   useEffect(() => {
     const repo = new SupabaseProductRepository(supabase)
-    const useCase = new GetProductsUseCase(repo)
-    useCase.execute()
-      .then((data) => {
-        setProducts(data)
-      })
+    new GetProductsUseCase(repo).execute()
+      .then(setProducts)
       .catch((err) => console.error('Erro ao carregar produtos:', err))
       .finally(() => setLoading(false))
   }, [])
@@ -258,9 +235,7 @@ export function HomePage() {
     return matchesCategory && matchesSearch
   })
 
-  const scrollToMenu = () => {
-    menuRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const scrollToMenu = () => menuRef.current?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <>
@@ -272,37 +247,28 @@ export function HomePage() {
 
       <TrustBand />
 
-      <section ref={menuRef} id="menu" className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      {/* Cardápio */}
+      <section ref={menuRef} id="menu" className="py-12 md:py-16 px-5 md:px-12 max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
           <div>
-            <p
-              className="text-xs font-semibold tracking-widest uppercase mb-1"
-              style={{ color: 'oklch(var(--c-primary))' }}
-            >
+            <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: 'oklch(var(--c-primary))' }}>
               CARDÁPIO
             </p>
-            <h2
-              className="text-h2-fluid font-display font-semibold"
-              style={{ color: 'oklch(var(--c-fg))' }}
-            >
+            <h2 className="text-h2-fluid font-display font-semibold" style={{ color: 'oklch(var(--c-fg))' }}>
               O que está saindo do forno
             </h2>
-            <p className="text-sm mt-1" style={{ color: 'oklch(var(--c-fg-muted))' }}>
+            <p className="text-xs md:text-sm mt-1" style={{ color: 'oklch(var(--c-fg-muted))' }}>
               Encomendas com 48h de antecedência. Preços por unidade inteira.
             </p>
           </div>
-
           <div
-            className="flex items-center gap-2 rounded-full border px-4 py-2 w-full sm:w-60 shrink-0"
-            style={{
-              borderColor: 'oklch(var(--c-line))',
-              background: 'oklch(var(--c-surface))',
-            }}
+            className="flex items-center gap-2 rounded-full border px-4 py-2 w-full sm:w-56 shrink-0"
+            style={{ borderColor: 'oklch(var(--c-line))', background: 'oklch(var(--c-surface))' }}
           >
-            <Search size={14} style={{ color: 'oklch(var(--c-fg-muted))' }} />
+            <Search size={13} style={{ color: 'oklch(var(--c-fg-muted))' }} />
             <input
               type="text"
-              placeholder="Buscar no cardápio…"
+              placeholder="Buscar…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="bg-transparent flex-1 text-sm outline-none placeholder:text-[oklch(var(--c-fg-muted))]"
@@ -311,20 +277,17 @@ export function HomePage() {
           </div>
         </div>
 
-        <div className="flex gap-2 flex-wrap mb-8">
+        {/* Category chips — horizontal scroll on mobile */}
+        <div className="flex gap-2 mb-6 overflow-x-auto pb-1 -mx-1 px-1 scrollbar-none">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-150"
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 whitespace-nowrap shrink-0"
               style={
                 activeCategory === cat
                   ? { background: 'oklch(var(--c-fg))', color: 'oklch(var(--c-bg))' }
-                  : {
-                      background: 'oklch(var(--c-surface))',
-                      color: 'oklch(var(--c-fg-soft))',
-                      border: '1px solid oklch(var(--c-line))',
-                    }
+                  : { background: 'oklch(var(--c-surface))', color: 'oklch(var(--c-fg-soft))', border: '1px solid oklch(var(--c-line))' }
               }
             >
               {cat}
@@ -333,30 +296,23 @@ export function HomePage() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className="rounded-2xl overflow-hidden animate-pulse"
-                style={{ background: 'oklch(var(--c-surface-2))' }}
-              >
+              <div key={i} className="rounded-2xl overflow-hidden animate-pulse" style={{ background: 'oklch(var(--c-surface-2))' }}>
                 <div className="aspect-[4/3]" />
-                <div className="p-4 flex flex-col gap-2">
-                  <div className="h-5 rounded w-3/4" style={{ background: 'oklch(var(--c-line))' }} />
+                <div className="p-3 flex flex-col gap-2">
+                  <div className="h-4 rounded w-3/4" style={{ background: 'oklch(var(--c-line))' }} />
                   <div className="h-3 rounded w-full" style={{ background: 'oklch(var(--c-line-soft))' }} />
-                  <div className="h-3 rounded w-2/3" style={{ background: 'oklch(var(--c-line-soft))' }} />
                 </div>
               </div>
             ))}
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-lg font-display" style={{ color: 'oklch(var(--c-fg-soft))' }}>
-              Nenhum produto encontrado.
-            </p>
+            <p className="text-lg font-display" style={{ color: 'oklch(var(--c-fg-soft))' }}>Nenhum produto encontrado.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {filtered.map((p) => (
               <div key={p.id} className="animate-fade-up">
                 <ProductCard product={p} />
@@ -368,10 +324,11 @@ export function HomePage() {
 
       <EncomendaSection />
 
-      <section id="sobre" className="py-20 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-[1fr_1.1fr] gap-16 items-center">
+      {/* Sobre */}
+      <section id="sobre" className="py-14 md:py-20 px-5 md:px-12 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-center">
           <div
-            className="aspect-[5/6] rounded-[40px] overflow-hidden hidden md:block"
+            className="aspect-[5/6] rounded-[32px] overflow-hidden hidden md:block"
             style={{ background: 'oklch(var(--c-surface-2))' }}
           >
             <img
@@ -381,34 +338,23 @@ export function HomePage() {
             />
           </div>
           <div>
-            <p
-              className="text-xs font-semibold tracking-widest uppercase mb-3"
-              style={{ color: 'oklch(var(--c-primary))' }}
-            >
+            <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: 'oklch(var(--c-primary))' }}>
               QUEM FAZ
             </p>
             <h2
-              className="text-h2-fluid font-display font-semibold mb-4 leading-tight"
-              style={{ color: 'oklch(var(--c-fg))' }}
+              className="font-display font-semibold mb-4 leading-tight"
+              style={{ fontSize: 'clamp(26px, 5vw, 48px)', color: 'oklch(var(--c-fg))' }}
             >
               {settings['sobre.titulo']}
             </h2>
-            <p className="text-lg leading-relaxed mb-6" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+            <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: 'oklch(var(--c-fg-soft))' }}>
               {settings['sobre.texto']}
             </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href={`https://instagram.com/${settings['contato.instagram']}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={`https://instagram.com/${settings['contato.instagram']}`} target="_blank" rel="noopener noreferrer">
                 <Button variant="ghost">@{settings['contato.instagram']}</Button>
               </a>
-              <a
-                href={`https://wa.me/${settings['contato.whatsapp']}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={`https://wa.me/${settings['contato.whatsapp']}`} target="_blank" rel="noopener noreferrer">
                 <Button variant="ghost">
                   <MessageCircle size={16} />
                   {settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}
