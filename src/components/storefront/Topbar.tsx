@@ -38,19 +38,8 @@ export function Topbar({ showAnnounce = true }: TopbarProps) {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-4 flex items-center justify-between gap-4 md:gap-6">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 shrink-0">
-            <div
-              className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold"
-              style={{ background: "oklch(var(--c-primary))" }}
-            >
-              A
-            </div>
-            <span
-              className="font-script text-2xl leading-none"
-              style={{ color: "oklch(var(--c-primary))" }}
-            >
-              Delicias Ayumi
-            </span>
+          <Link to="/" className="flex items-center shrink-0">
+            <img src="/logo-ayumi.png" alt="Delicias Ayumi" className="h-12 w-auto" />
           </Link>
 
           {/* Nav desktop */}

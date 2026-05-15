@@ -19,24 +19,8 @@ export function StorefrontLayout() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16 grid grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-8 md:gap-12">
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
-                style={{ background: "oklch(var(--c-primary))" }}
-              >
-                A
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="font-script text-3xl" style={{ color: "#fff" }}>
-                  Delicias Ayumi
-                </span>
-                <span
-                  className="text-[10px] font-medium tracking-widest uppercase mt-1"
-                  style={{ color: "oklch(0.85 0.1 200)" }}
-                >
-                  Feito com amor ♡
-                </span>
-              </div>
+            <div className="mb-4">
+              <img src="/logo-ayumi.png" alt="Delicias Ayumi" className="h-16 w-auto brightness-0 invert" />
             </div>
             <p className="text-sm leading-relaxed max-w-xs" style={{ opacity: 0.7 }}>
               Doces e salgados artesanais para festas, eventos e dias comuns que merecem algo bom.
