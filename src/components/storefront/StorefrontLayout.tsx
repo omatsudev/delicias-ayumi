@@ -85,7 +85,7 @@ export function StorefrontLayout() {
             <ul className="flex flex-col gap-3 text-sm" style={{ opacity: 0.8 }}>
               <li>(24) 98888-0000</li>
               <li>oi@deliciasayumi.com.br</li>
-              <li>R. Manoel de França, 187 Casa B</li>
+              <li>R. Antônio Manoel de França, 187 Casa B · Corrêas</li>
               <li>@delicias_ayumi</li>
             </ul>
           </div>

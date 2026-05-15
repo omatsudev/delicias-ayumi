@@ -143,7 +143,7 @@ function TrustBand() {
         {[
           { icon: <Leaf size={18} />, title: 'Sem conservantes', sub: 'Ingredientes frescos' },
           { icon: <Truck size={18} />, title: 'Entrega em Petrópolis', sub: 'Toda quarta e sábado' },
-          { icon: <Package size={18} />, title: 'Retirada no ateliê', sub: 'R. Manoel de França, 187 Casa B' },
+          { icon: <Package size={18} />, title: 'Retirada no ateliê', sub: 'R. Antônio Manoel de França, 187 · Corrêas' },
           { icon: <MessageCircle size={18} />, title: 'Atendimento humano', sub: 'WhatsApp direto' },
         ].map((item) => (
           <div key={item.title} className="flex items-center gap-3">
