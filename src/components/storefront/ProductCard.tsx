@@ -49,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.name}
           </h3>
         </Link>
-        <p className="text-xs md:text-[13.5px] mb-3 line-clamp-2 flex-1" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+        <p className="text-sm mb-3 line-clamp-2 flex-1" style={{ color: 'oklch(var(--c-fg-soft))' }}>
           {product.description}
         </p>
         <div className="flex items-center justify-between gap-2">

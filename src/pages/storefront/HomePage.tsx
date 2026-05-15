@@ -152,10 +152,10 @@ function TrustBand() {
               {item.icon}
             </div>
             <div>
-              <p className="text-xs font-semibold leading-tight" style={{ color: 'oklch(var(--c-fg))' }}>
+              <p className="text-sm font-semibold leading-tight" style={{ color: 'oklch(var(--c-fg))' }}>
                 {item.title}
               </p>
-              <p className="text-[11px]" style={{ color: 'oklch(var(--c-fg-muted))' }}>
+              <p className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>
                 {item.sub}
               </p>
             </div>
@@ -199,7 +199,7 @@ function EncomendaSection() {
               <h4 className="font-display text-lg md:text-xl font-semibold mb-1.5" style={{ color: 'oklch(var(--c-fg))' }}>
                 {s.t}
               </h4>
-              <p className="text-xs md:text-sm leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+              <p className="text-sm leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
                 {s.d}
               </p>
             </div>
