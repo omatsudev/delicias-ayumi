@@ -108,7 +108,7 @@ export function AdminCashFlow() {
 
   async function fetchEntries() {
     const { data } = await supabase
-      .from("cash_entries")
+      .from("ayumi_cash_entries")
       .select("*")
       .order("created_at", { ascending: false });
     setEntries(data ?? []);
@@ -117,7 +117,7 @@ export function AdminCashFlow() {
 
   const onSubmit = async (data: FormData) => {
     setSaving(true);
-    await supabase.from("cash_entries").insert({
+    await supabase.from("ayumi_cash_entries").insert({
       type: data.type,
       category: data.category,
       description: data.description,

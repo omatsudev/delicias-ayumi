@@ -1,19 +1,19 @@
--- ── Enums ────────────────────────────────────────────────────────
-create type product_category as enum ('Bolos', 'Tortas', 'Empadões');
-create type delivery_method  as enum ('entrega', 'retirada');
-create type payment_method   as enum ('pix', 'cartao', 'dinheiro');
-create type order_status     as enum (
+-- ── Enums (prefixados ayumi_ para não colidir com outros projetos no unified-platform) ──
+create type ayumi_product_category as enum ('Bolos', 'Tortas', 'Empadões');
+create type ayumi_delivery_method  as enum ('entrega', 'retirada');
+create type ayumi_payment_method   as enum ('pix', 'cartao', 'dinheiro');
+create type ayumi_order_status     as enum (
   'em_producao', 'saiu_entrega', 'pronto_retirada', 'entregue', 'cancelado'
 );
-create type cash_entry_type  as enum ('in', 'out');
+create type ayumi_cash_entry_type  as enum ('in', 'out');
 
 -- ── Tabelas ───────────────────────────────────────────────────────
 
-create table if not exists products (
+create table if not exists ayumi_products (
   id           uuid primary key default gen_random_uuid(),
   slug         text unique not null,
   name         text not null,
-  category     product_category not null,
+  category     ayumi_product_category not null,
   description  text not null default '',
   size_label   text not null default '',
   price_cents  integer not null default 0,
@@ -28,7 +28,7 @@ create table if not exists products (
   updated_at   timestamptz not null default now()
 );
 
-create table if not exists neighborhoods (
+create table if not exists ayumi_neighborhoods (
   id        serial primary key,
   name      text not null,
   fee_cents integer not null,
@@ -36,17 +36,17 @@ create table if not exists neighborhoods (
   active    boolean not null default true
 );
 
-create table if not exists orders (
+create table if not exists ayumi_orders (
   id              uuid primary key default gen_random_uuid(),
   order_number    text unique not null,
   customer_name   text not null,
   customer_phone  text not null,
-  delivery_method delivery_method not null,
+  delivery_method ayumi_delivery_method not null,
   bairro          text,
   address         text,
   cep             text,
-  payment_method  payment_method not null,
-  status          order_status not null default 'em_producao',
+  payment_method  ayumi_payment_method not null,
+  status          ayumi_order_status not null default 'em_producao',
   subtotal_cents  integer not null default 0,
   fee_cents       integer not null default 0,
   total_cents     integer not null default 0,
@@ -55,32 +55,32 @@ create table if not exists orders (
   created_at      timestamptz not null default now()
 );
 
-create table if not exists order_items (
+create table if not exists ayumi_order_items (
   id                uuid primary key default gen_random_uuid(),
-  order_id          uuid not null references orders(id) on delete cascade,
-  product_id        uuid not null references products(id),
+  order_id          uuid not null references ayumi_orders(id) on delete cascade,
+  product_id        uuid not null references ayumi_products(id),
   qty               integer not null,
   unit_price_cents  integer not null,
   product_snapshot  jsonb not null default '{}'
 );
 
-create table if not exists cash_entries (
+create table if not exists ayumi_cash_entries (
   id           uuid primary key default gen_random_uuid(),
-  type         cash_entry_type not null,
+  type         ayumi_cash_entry_type not null,
   category     text not null,
   description  text not null default '',
   amount_cents integer not null,
-  order_id     uuid references orders(id),
+  order_id     uuid references ayumi_orders(id),
   created_at   timestamptz not null default now()
 );
 
-create table if not exists admins (
+create table if not exists ayumi_admins (
   id      uuid primary key references auth.users(id) on delete cascade,
   email   text not null
 );
 
 -- ── updated_at trigger ────────────────────────────────────────────
-create or replace function set_updated_at()
+create or replace function ayumi_set_updated_at()
 returns trigger language plpgsql as $$
 begin
   new.updated_at = now();
@@ -88,71 +88,71 @@ begin
 end;
 $$;
 
-create trigger products_updated_at
-  before update on products
-  for each row execute procedure set_updated_at();
+create trigger ayumi_products_updated_at
+  before update on ayumi_products
+  for each row execute procedure ayumi_set_updated_at();
 
 -- ── Sequência de pedidos (começando em #2042) ─────────────────────
-create sequence if not exists order_seq start 2042;
+create sequence if not exists ayumi_order_seq start 2042;
 
 -- ── Row Level Security ────────────────────────────────────────────
-alter table products      enable row level security;
-alter table neighborhoods enable row level security;
-alter table orders        enable row level security;
-alter table order_items   enable row level security;
-alter table cash_entries  enable row level security;
-alter table admins        enable row level security;
+alter table ayumi_products      enable row level security;
+alter table ayumi_neighborhoods enable row level security;
+alter table ayumi_orders        enable row level security;
+alter table ayumi_order_items   enable row level security;
+alter table ayumi_cash_entries  enable row level security;
+alter table ayumi_admins        enable row level security;
 
--- products: leitura pública (apenas ativos); escrita só admin
-create policy "products_read_public" on products
+-- ayumi_products: leitura pública (apenas ativos); escrita só admin
+create policy "ayumi_products_read_public" on ayumi_products
   for select using (active = true);
 
-create policy "products_admin_all" on products
+create policy "ayumi_products_admin_all" on ayumi_products
   for all using (
-    auth.uid() in (select id from admins)
+    auth.uid() in (select id from ayumi_admins)
   );
 
--- neighborhoods: leitura pública
-create policy "neighborhoods_read_public" on neighborhoods
+-- ayumi_neighborhoods: leitura pública
+create policy "ayumi_neighborhoods_read_public" on ayumi_neighborhoods
   for select using (active = true);
 
-create policy "neighborhoods_admin_all" on neighborhoods
+create policy "ayumi_neighborhoods_admin_all" on ayumi_neighborhoods
   for all using (
-    auth.uid() in (select id from admins)
+    auth.uid() in (select id from ayumi_admins)
   );
 
--- orders: insert público (para criar pedidos); leitura/update só admin
-create policy "orders_insert_public" on orders
+-- ayumi_orders: insert público (para criar pedidos); leitura/update só admin
+create policy "ayumi_orders_insert_public" on ayumi_orders
   for insert with check (true);
 
-create policy "orders_admin_all" on orders
+create policy "ayumi_orders_admin_all" on ayumi_orders
   for all using (
-    auth.uid() in (select id from admins)
+    auth.uid() in (select id from ayumi_admins)
   );
 
--- order_items: insert público junto com pedido
-create policy "order_items_insert_public" on order_items
+-- ayumi_order_items: insert público junto com pedido
+create policy "ayumi_order_items_insert_public" on ayumi_order_items
   for insert with check (true);
 
-create policy "order_items_admin_all" on order_items
+create policy "ayumi_order_items_admin_all" on ayumi_order_items
   for all using (
-    auth.uid() in (select id from admins)
+    auth.uid() in (select id from ayumi_admins)
   );
 
--- cash_entries: só admin
-create policy "cash_entries_admin_all" on cash_entries
+-- ayumi_cash_entries: só admin
+create policy "ayumi_cash_entries_admin_all" on ayumi_cash_entries
   for all using (
-    auth.uid() in (select id from admins)
+    auth.uid() in (select id from ayumi_admins)
   );
 
--- admins: só o próprio usuário pode ver
-create policy "admins_self" on admins
+-- ayumi_admins: só o próprio usuário pode ver
+create policy "ayumi_admins_self" on ayumi_admins
   for select using (auth.uid() = id);
 
 -- ── Seeds ─────────────────────────────────────────────────────────
 
 -- Bairros de Petrópolis
-insert into neighborhoods (name, fee_cents, km) values
+insert into ayumi_neighborhoods (name, fee_cents, km) values
   ('Centro',      800,  2),
   ('Quitandinha', 1000, 4),
   ('Bingen',      1000, 4),
@@ -163,7 +163,7 @@ insert into neighborhoods (name, fee_cents, km) values
   ('Mosela',      1000, 5);
 
 -- Produtos
-insert into products (slug, name, category, description, size_label, price_cents, cost_cents, stock, active, tags, swatch) values
+insert into ayumi_products (slug, name, category, description, size_label, price_cents, cost_cents, stock, active, tags, swatch) values
 (
   'bolo-cenoura-brigadeiro',
   'Bolo de Cenoura com Brigadeiro',

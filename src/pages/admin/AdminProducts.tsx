@@ -67,7 +67,7 @@ export function AdminProducts() {
 
   async function fetchProducts() {
     const { data } = await supabase
-      .from("products")
+      .from("ayumi_products")
       .select("*")
       .order("created_at", { ascending: false });
     setProducts(data ?? []);
@@ -100,7 +100,7 @@ export function AdminProducts() {
     try {
       if (editing) {
         await supabase
-          .from("products")
+          .from("ayumi_products")
           .update({
             name: data.name,
             category: data.category as ProductCategory,
@@ -114,7 +114,7 @@ export function AdminProducts() {
           })
           .eq("id", editing.id);
       } else {
-        await supabase.from("products").insert({
+        await supabase.from("ayumi_products").insert({
           name: data.name,
           slug: slugify(data.name),
           category: data.category as ProductCategory,
@@ -139,14 +139,14 @@ export function AdminProducts() {
   const handleDelete = async () => {
     if (!deleteTarget) return;
     setDeleting(true);
-    await supabase.from("products").delete().eq("id", deleteTarget.id);
+    await supabase.from("ayumi_products").delete().eq("id", deleteTarget.id);
     setDeleteTarget(null);
     setDeleting(false);
     fetchProducts();
   };
 
   const handleToggleActive = async (p: Product) => {
-    await supabase.from("products").update({ active: !p.active }).eq("id", p.id);
+    await supabase.from("ayumi_products").update({ active: !p.active }).eq("id", p.id);
     setProducts((prev) => prev.map((x) => x.id === p.id ? { ...x, active: !x.active } : x));
   };
 

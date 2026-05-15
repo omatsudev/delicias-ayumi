@@ -37,7 +37,7 @@ export function AdminOrders() {
 
   async function fetchOrders() {
     const { data } = await supabase
-      .from("orders")
+      .from("ayumi_orders")
       .select("*")
       .order("created_at", { ascending: false });
     setOrders(data ?? []);
@@ -47,7 +47,7 @@ export function AdminOrders() {
   async function advanceStatus(order: Order) {
     const next = NEXT_STATUS[order.status];
     if (!next) return;
-    await supabase.from("orders").update({ status: next }).eq("id", order.id);
+    await supabase.from("ayumi_orders").update({ status: next }).eq("id", order.id);
     setOrders((prev) => prev.map((o) => o.id === order.id ? { ...o, status: next } : o));
   }
 

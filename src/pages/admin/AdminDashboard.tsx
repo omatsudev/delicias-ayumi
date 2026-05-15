@@ -53,9 +53,9 @@ export function AdminDashboard() {
 
   useEffect(() => {
     Promise.all([
-      supabase.from("orders").select("*").order("created_at", { ascending: false }).limit(50),
-      supabase.from("cash_entries").select("*").order("created_at", { ascending: false }).limit(100),
-      supabase.from("products").select("*").eq("active", true).limit(4),
+      supabase.from("ayumi_orders").select("*").order("created_at", { ascending: false }).limit(50),
+      supabase.from("ayumi_cash_entries").select("*").order("created_at", { ascending: false }).limit(100),
+      supabase.from("ayumi_products").select("*").eq("active", true).limit(4),
     ]).then(([ordersRes, cashRes, productsRes]) => {
       setOrders(ordersRes.data ?? []);
       setCashEntries(cashRes.data ?? []);

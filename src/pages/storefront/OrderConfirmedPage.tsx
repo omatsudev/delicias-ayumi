@@ -16,7 +16,7 @@ export function OrderConfirmedPage() {
   useEffect(() => {
     if (!id) return;
     supabase
-      .from("orders")
+      .from("ayumi_orders")
       .select("*")
       .eq("id", id)
       .single()

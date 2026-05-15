@@ -27,7 +27,7 @@ export function ProductPage() {
   useEffect(() => {
     if (!slug) return;
     supabase
-      .from("products")
+      .from("ayumi_products")
       .select("*")
       .eq("slug", slug)
       .single()
@@ -35,7 +35,7 @@ export function ProductPage() {
         setProduct(data);
         if (data) {
           supabase
-            .from("products")
+            .from("ayumi_products")
             .select("*")
             .eq("category", data.category)
             .eq("active", true)

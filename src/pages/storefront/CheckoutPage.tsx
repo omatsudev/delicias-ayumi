@@ -55,7 +55,7 @@ export function CheckoutPage() {
 
   useEffect(() => {
     supabase
-      .from("neighborhoods")
+      .from("ayumi_neighborhoods")
       .select("*")
       .eq("active", true)
       .order("name")
@@ -104,7 +104,7 @@ export function CheckoutPage() {
       }));
 
       const { data: order, error } = await supabase
-        .from("orders")
+        .from("ayumi_orders")
         .insert({
           order_number: orderNumber,
           customer_name: data.customerName,

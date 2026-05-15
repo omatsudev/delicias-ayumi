@@ -135,7 +135,7 @@ export function HomePage() {
 
   useEffect(() => {
     supabase
-      .from("products")
+      .from("ayumi_products")
       .select("*")
       .eq("active", true)
       .order("created_at", { ascending: false })
