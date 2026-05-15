@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { Topbar } from "./Topbar";
-import { MessageCircle } from "lucide-react";
 import { useSettings } from "@/contexts/SettingsContext";
 
 export function StorefrontLayout() {
@@ -26,16 +25,6 @@ export function StorefrontLayout() {
               Doces e salgados artesanais para festas, eventos e dias comuns que merecem algo bom.
               Petrópolis, RJ.
             </p>
-            <a
-              href={`https://wa.me/${settings['contato.whatsapp']}?text=Olá! Gostaria de fazer uma encomenda.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-5 text-sm font-medium px-4 py-2 rounded-xl transition-opacity hover:opacity-80"
-              style={{ background: "rgba(255,255,255,0.12)", color: "#fff" }}
-            >
-              <MessageCircle size={15} />
-              (24) 98888-0000
-            </a>
           </div>
 
           <div>
@@ -67,10 +56,28 @@ export function StorefrontLayout() {
               Contato
             </h5>
             <div className="grid grid-cols-2 md:grid-cols-1 gap-x-6 gap-y-3 text-sm" style={{ opacity: 0.8 }}>
-              <span>{settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}</span>
-              <span>{settings['contato.email']}</span>
-              <span className="col-span-2 md:col-span-1">{settings['contato.endereco']}</span>
-              <span>@{settings['contato.instagram']}</span>
+              <a href={`tel:+${settings['contato.whatsapp']}`} className="hover:opacity-60 transition-opacity">
+                {settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}
+              </a>
+              <a href={`mailto:${settings['contato.email']}`} className="hover:opacity-60 transition-opacity">
+                {settings['contato.email']}
+              </a>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings['contato.endereco'])}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-2 md:col-span-1 hover:opacity-60 transition-opacity"
+              >
+                {settings['contato.endereco']}
+              </a>
+              <a
+                href={`https://instagram.com/${settings['contato.instagram']}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-60 transition-opacity"
+              >
+                @{settings['contato.instagram']}
+              </a>
             </div>
           </div>
         </div>
