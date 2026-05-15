@@ -350,11 +350,11 @@ export function HomePage() {
             <p className="text-base md:text-lg leading-relaxed mb-6" style={{ color: 'oklch(var(--c-fg-soft))' }}>
               {settings['sobre.texto']}
             </p>
-            <div className="flex flex-wrap gap-3">
-              <a href={`https://instagram.com/${settings['contato.instagram']}`} target="_blank" rel="noopener noreferrer">
+            <div className="flex flex-row flex-wrap gap-3">
+              <a className="inline-flex" href={`https://instagram.com/${settings['contato.instagram']}`} target="_blank" rel="noopener noreferrer">
                 <Button variant="ghost">@{settings['contato.instagram']}</Button>
               </a>
-              <a href={`https://wa.me/${settings['contato.whatsapp']}`} target="_blank" rel="noopener noreferrer">
+              <a className="inline-flex" href={`https://wa.me/${settings['contato.whatsapp']}`} target="_blank" rel="noopener noreferrer">
                 <Button variant="ghost">
                   <MessageCircle size={16} />
                   {settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}
