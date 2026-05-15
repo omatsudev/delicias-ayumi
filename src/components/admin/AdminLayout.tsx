@@ -6,6 +6,7 @@ import {
   ClipboardList,
   DollarSign,
   Calculator,
+  Settings,
   ExternalLink,
   LogOut,
   Menu,
@@ -20,6 +21,7 @@ const NAV_ITEMS = [
   { to: "/admin/pedidos", icon: ClipboardList, label: "Pedidos" },
   { to: "/admin/caixa", icon: DollarSign, label: "Caixa" },
   { to: "/admin/calculadora", icon: Calculator, label: "Calculadora" },
+  { to: "/admin/configuracoes", icon: Settings, label: "Configurações" },
 ];
 
 function Sidebar({ onClose }: { onClose?: () => void }) {

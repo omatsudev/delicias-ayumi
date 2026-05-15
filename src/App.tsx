@@ -11,11 +11,14 @@ import { AdminProducts } from "./pages/admin/AdminProducts";
 import { AdminOrders } from "./pages/admin/AdminOrders";
 import { AdminCashFlow } from "./pages/admin/AdminCashFlow";
 import { AdminCalculator } from "./pages/admin/AdminCalculator";
+import { AdminSettings } from "./pages/admin/AdminSettings";
 import { AdminLogin } from "./pages/admin/AdminLogin";
 import { AdminGuard } from "./components/admin/AdminGuard";
+import { SettingsProvider } from "./contexts/SettingsContext";
 
 function App() {
   return (
+    <SettingsProvider>
     <Routes>
       {/* Storefront público */}
       <Route element={<StorefrontLayout />}>
@@ -38,11 +41,13 @@ function App() {
           <Route path="/admin/pedidos" element={<AdminOrders />} />
           <Route path="/admin/caixa" element={<AdminCashFlow />} />
           <Route path="/admin/calculadora" element={<AdminCalculator />} />
+          <Route path="/admin/configuracoes" element={<AdminSettings />} />
         </Route>
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </SettingsProvider>
   );
 }
 

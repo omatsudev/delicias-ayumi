@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, MapPin, Menu, X } from "lucide-react";
 import { useCartStore } from "../../store/cart";
+import { useSettings } from "@/contexts/SettingsContext";
 
 interface TopbarProps {
   showAnnounce?: boolean;
@@ -11,6 +12,7 @@ export function Topbar({ showAnnounce = true }: TopbarProps) {
   const itemCount = useCartStore((s) => s.itemCount());
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const settings = useSettings();
 
   return (
     <>
@@ -21,7 +23,7 @@ export function Topbar({ showAnnounce = true }: TopbarProps) {
           style={{ background: "oklch(var(--c-primary))", fontSize: "12.5px" }}
         >
           <MapPin size={12} className="inline mr-1.5 -mt-0.5" />
-          Entregamos em toda Petrópolis · Retirada em Corrêas ♡
+          {settings['announce.texto']}
         </div>
       )}
 

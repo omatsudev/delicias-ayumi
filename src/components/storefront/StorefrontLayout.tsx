@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import { Topbar } from "./Topbar";
 import { MessageCircle } from "lucide-react";
-
-const WA_NUMBER = '5524988880000'
+import { useSettings } from "@/contexts/SettingsContext";
 
 export function StorefrontLayout() {
+  const settings = useSettings()
   return (
     <div className="min-h-screen" style={{ background: "oklch(var(--c-bg))" }}>
       <Topbar />
@@ -43,7 +43,7 @@ export function StorefrontLayout() {
               Petrópolis, RJ.
             </p>
             <a
-              href={`https://wa.me/${WA_NUMBER}?text=Olá! Gostaria de fazer uma encomenda.`}
+              href={`https://wa.me/${settings['contato.whatsapp']}?text=Olá! Gostaria de fazer uma encomenda.`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-5 text-sm font-medium px-4 py-2 rounded-xl transition-opacity hover:opacity-80"
@@ -83,10 +83,10 @@ export function StorefrontLayout() {
               Contato
             </h5>
             <ul className="flex flex-col gap-3 text-sm" style={{ opacity: 0.8 }}>
-              <li>(24) 98888-0000</li>
-              <li>oi@deliciasayumi.com.br</li>
-              <li>R. Antônio Manoel de França, 187 Casa B · Corrêas</li>
-              <li>@delicias_ayumi</li>
+              <li>{settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}</li>
+              <li>{settings['contato.email']}</li>
+              <li>{settings['contato.endereco']}</li>
+              <li>@{settings['contato.instagram']}</li>
             </ul>
           </div>
         </div>

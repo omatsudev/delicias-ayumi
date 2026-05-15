@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Search, MessageCircle, Leaf, Truck, Package } from 'lucide-react'
+import { useSettings } from '@/contexts/SettingsContext'
 import { supabase } from '@/lib/supabase'
 import { SupabaseProductRepository } from '@/lib/infrastructure/repositories/SupabaseProductRepository'
 import { GetProductsUseCase } from '@/lib/application/use-cases/GetProductsUseCase'
@@ -9,9 +10,8 @@ import { ProductCard } from '@/components/storefront/ProductCard'
 import { Button } from '@/components/ui/Button'
 
 const CATEGORIES: ('Tudo' | ProductCategory)[] = ['Tudo', 'Bolos', 'Tortas', 'Empadões']
-const WA_NUMBER = '5524988880000'
 
-function HeroEditorial({ onShopClick }: { onShopClick: () => void }) {
+function HeroEditorial({ onShopClick, waNumber, paragraph }: { onShopClick: () => void; waNumber: string; paragraph: string }) {
   return (
     <section
       className="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto"
@@ -51,8 +51,7 @@ function HeroEditorial({ onShopClick }: { onShopClick: () => void }) {
           </h1>
 
           <p className="text-base md:text-lg max-w-lg leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
-            Receitas que atravessaram três gerações, preparadas no nosso ateliê em Corrêas.
-            Encomende para sua mesa ou retire conosco.
+            {paragraph}
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -60,7 +59,7 @@ function HeroEditorial({ onShopClick }: { onShopClick: () => void }) {
               Ver cardápio
             </Button>
             <a
-              href={`https://wa.me/${WA_NUMBER}?text=Olá! Gostaria de fazer uma encomenda.`}
+              href={`https://wa.me/${waNumber}?text=Olá! Gostaria de fazer uma encomenda.`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -232,6 +231,7 @@ function EncomendaSection() {
 }
 
 export function HomePage() {
+  const settings = useSettings()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -264,7 +264,11 @@ export function HomePage() {
 
   return (
     <>
-      <HeroEditorial onShopClick={scrollToMenu} />
+      <HeroEditorial
+        onShopClick={scrollToMenu}
+        waNumber={settings['contato.whatsapp']}
+        paragraph={settings['hero.paragrafo']}
+      />
 
       <TrustBand />
 
@@ -387,28 +391,27 @@ export function HomePage() {
               className="text-h2-fluid font-display font-semibold mb-4 leading-tight"
               style={{ color: 'oklch(var(--c-fg))' }}
             >
-              A receita é da minha avó. O ateliê é meu.
+              {settings['sobre.titulo']}
             </h2>
             <p className="text-lg leading-relaxed mb-6" style={{ color: 'oklch(var(--c-fg-soft))' }}>
-              Sou a Ayumi. Há alguns anos, transformei a cozinha de casa em ateliê e nunca mais parei.
-              Cada bolo sai daqui assinado por mim — e provado três vezes antes de te entregar.
+              {settings['sobre.texto']}
             </p>
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://instagram.com/delicias_ayumi"
+                href={`https://instagram.com/${settings['contato.instagram']}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="ghost">@delicias_ayumi</Button>
+                <Button variant="ghost">@{settings['contato.instagram']}</Button>
               </a>
               <a
-                href={`https://wa.me/${WA_NUMBER}`}
+                href={`https://wa.me/${settings['contato.whatsapp']}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Button variant="ghost">
                   <MessageCircle size={16} />
-                  (24) 98888-0000
+                  {settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}
                 </Button>
               </a>
             </div>
