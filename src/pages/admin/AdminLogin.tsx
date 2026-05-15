@@ -55,7 +55,7 @@ export function AdminLogin() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@deliciasayumi.com.br"
+              placeholder="ayumi@email.com"
               required
             />
             <Input

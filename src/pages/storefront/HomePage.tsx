@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Search, MessageCircle } from 'lucide-react'
+import { Search, MessageCircle, Leaf, Truck, Package } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { SupabaseProductRepository } from '@/lib/infrastructure/repositories/SupabaseProductRepository'
 import { GetProductsUseCase } from '@/lib/application/use-cases/GetProductsUseCase'
@@ -29,18 +29,30 @@ function HeroEditorial({ onShopClick }: { onShopClick: () => void }) {
             <div className="flex-1 h-px max-w-12" style={{ background: 'oklch(var(--c-primary))' }} />
           </div>
 
-          <h1 className="text-h1-fluid font-display font-semibold leading-[1.05]">
-            Sabores que{' '}
-            <em className="font-script not-italic" style={{ color: 'oklch(var(--c-primary))' }}>
-              encantam
-            </em>{' '}
-            e histórias que
-            <br className="hidden md:block" /> nutrem a alma
+          <h1 className="font-display leading-[0.98]" style={{ fontSize: 'clamp(46px, 6vw, 84px)', fontWeight: 500, letterSpacing: '-0.025em' }}>
+            Bolos, tortas
+            <br />
+            <em
+              className="font-script not-italic"
+              style={{
+                color: 'oklch(var(--c-primary))',
+                fontWeight: 700,
+                display: 'inline-block',
+                transform: 'rotate(-2deg)',
+                transformOrigin: 'left center',
+                lineHeight: 0.9,
+                padding: '0.1em 0',
+              }}
+            >
+              e empadões
+            </em>
+            <br />
+            <span style={{ color: 'oklch(var(--c-fg-soft))' }}>de família.</span>
           </h1>
 
-          <p className="text-base md:text-lg max-w-lg" style={{ color: 'oklch(var(--c-fg-soft))' }}>
-            Bolos, tortas e empadões artesanais feitos com ingredientes selecionados da serra.
-            Cada encomenda é preparada com carinho para o seu momento especial.
+          <p className="text-base md:text-lg max-w-lg leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+            Receitas que atravessaram três gerações, preparadas no nosso ateliê em Corrêas.
+            Encomende para sua mesa ou retire conosco.
           </p>
 
           <div className="flex flex-wrap gap-3">
@@ -61,15 +73,12 @@ function HeroEditorial({ onShopClick }: { onShopClick: () => void }) {
 
           <div className="flex gap-8 pt-2">
             {[
-              { value: '5+', label: 'Anos de experiência' },
-              { value: '+100', label: 'Clientes satisfeitos' },
-              { value: '100%', label: 'Ingredientes naturais' },
+              { value: '5+', label: 'anos no forno', color: 'oklch(var(--c-primary))' },
+              { value: '+100', label: 'clientes em Petrópolis', color: 'oklch(var(--c-accent))' },
+              { value: '100%', label: 'ingredientes naturais', color: 'oklch(var(--c-primary))' },
             ].map((kpi) => (
               <div key={kpi.label} className="flex flex-col">
-                <span
-                  className="font-display text-2xl font-semibold"
-                  style={{ color: 'oklch(var(--c-primary))' }}
-                >
+                <span className="font-display text-2xl font-semibold" style={{ color: kpi.color }}>
                   {kpi.value}
                 </span>
                 <span className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>
@@ -80,14 +89,18 @@ function HeroEditorial({ onShopClick }: { onShopClick: () => void }) {
           </div>
         </div>
 
-        <div className="relative hidden md:block">
+        <div className="relative hidden md:block" style={{ aspectRatio: '4/5' }}>
           <div
-            className="aspect-square rounded-[40px] flex items-center justify-center overflow-hidden"
-            style={{ background: 'oklch(var(--c-surface-2))' }}
-          >
+            className="absolute inset-0 rounded-[40px]"
+            style={{
+              background: 'oklch(var(--c-primary-soft))',
+              transform: 'rotate(-2.5deg) translate(10px, 10px)',
+            }}
+          />
+          <div className="absolute inset-0 rounded-[40px] overflow-hidden shadow-xl">
             <img
               src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&q=80"
-              alt="Delícias Ayumi"
+              alt="Delicias Ayumi"
               className="w-full h-full object-cover"
             />
           </div>
@@ -97,20 +110,121 @@ function HeroEditorial({ onShopClick }: { onShopClick: () => void }) {
             style={{ background: 'oklch(var(--c-surface))' }}
           >
             <div
-              className="w-10 h-10 rounded-full flex items-center justify-center text-white text-base"
-              style={{ background: 'oklch(var(--c-accent))' }}
+              className="w-9 h-9 rounded-full flex items-center justify-center"
+              style={{ background: 'oklch(var(--c-accent-soft))', color: 'oklch(var(--c-accent))' }}
             >
               ★
             </div>
             <div>
               <p className="text-sm font-semibold" style={{ color: 'oklch(var(--c-fg))' }}>
-                4,9 no Google
+                4.9 · 312 avaliações
               </p>
               <p className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>
-                +47 avaliações
+                Google · Instagram
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function TrustBand() {
+  return (
+    <section
+      className="border-y"
+      style={{
+        borderColor: 'oklch(var(--c-line-soft))',
+        background: 'oklch(var(--c-surface))',
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex flex-wrap justify-around gap-5">
+        {[
+          { icon: <Leaf size={18} />, title: 'Sem conservantes', sub: 'Ingredientes frescos' },
+          { icon: <Truck size={18} />, title: 'Entrega em Petrópolis', sub: 'Toda quarta e sábado' },
+          { icon: <Package size={18} />, title: 'Retirada no ateliê', sub: 'Corrêas · Mosela, sem taxa' },
+          { icon: <MessageCircle size={18} />, title: 'Atendimento humano', sub: 'WhatsApp direto' },
+        ].map((item) => (
+          <div key={item.title} className="flex items-center gap-3">
+            <div
+              className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+              style={{ background: 'oklch(var(--c-bg))', color: 'oklch(var(--c-primary))' }}
+            >
+              {item.icon}
+            </div>
+            <div>
+              <p className="text-sm font-semibold" style={{ color: 'oklch(var(--c-fg))' }}>
+                {item.title}
+              </p>
+              <p className="text-xs" style={{ color: 'oklch(var(--c-fg-muted))' }}>
+                {item.sub}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function EncomendaSection() {
+  return (
+    <section
+      id="encomendas"
+      className="border-y"
+      style={{
+        borderColor: 'oklch(var(--c-line-soft))',
+        background: 'oklch(var(--c-surface))',
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-20">
+        <div className="text-center mb-12">
+          <p
+            className="text-xs font-semibold tracking-widest uppercase mb-2"
+            style={{ color: 'oklch(var(--c-primary))' }}
+          >
+            COMO FUNCIONA
+          </p>
+          <h2
+            className="text-h2-fluid font-display font-semibold"
+            style={{ color: 'oklch(var(--c-fg))' }}
+          >
+            Da nossa cozinha pra sua mesa
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {[
+            { n: '01', t: 'Escolha', d: 'Monte sua encomenda com pelo menos 48h de antecedência.' },
+            { n: '02', t: 'Pague', d: 'Pix, cartão ou na entrega — tanto faz pra gente.' },
+            { n: '03', t: 'Preparamos', d: 'Tudo feito do zero no nosso ateliê na Mosela.' },
+            { n: '04', t: 'Chega aí', d: 'Entrega em Petrópolis ou retirada no ateliê.' },
+          ].map((s) => (
+            <div
+              key={s.n}
+              className="rounded-2xl p-6 border"
+              style={{
+                background: 'oklch(var(--c-bg))',
+                borderColor: 'oklch(var(--c-line-soft))',
+              }}
+            >
+              <div
+                className="font-display text-4xl font-semibold leading-none mb-4"
+                style={{ color: 'oklch(var(--c-primary))', letterSpacing: '-0.02em' }}
+              >
+                {s.n}
+              </div>
+              <h4
+                className="font-display text-xl font-semibold mb-2"
+                style={{ color: 'oklch(var(--c-fg))' }}
+              >
+                {s.t}
+              </h4>
+              <p className="text-sm leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+                {s.d}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -152,25 +266,30 @@ export function HomePage() {
     <>
       <HeroEditorial onShopClick={scrollToMenu} />
 
+      <TrustBand />
+
       <section ref={menuRef} id="menu" className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <p
               className="text-xs font-semibold tracking-widest uppercase mb-1"
               style={{ color: 'oklch(var(--c-primary))' }}
             >
-              NOSSO CARDÁPIO
+              CARDÁPIO
             </p>
             <h2
               className="text-h2-fluid font-display font-semibold"
               style={{ color: 'oklch(var(--c-fg))' }}
             >
-              Feito com amor
+              O que está saindo do forno
             </h2>
+            <p className="text-sm mt-1" style={{ color: 'oklch(var(--c-fg-muted))' }}>
+              Encomendas com 48h de antecedência. Preços por unidade inteira.
+            </p>
           </div>
 
           <div
-            className="flex items-center gap-2 rounded-full border px-4 py-2 w-full sm:w-60"
+            className="flex items-center gap-2 rounded-full border px-4 py-2 w-full sm:w-60 shrink-0"
             style={{
               borderColor: 'oklch(var(--c-line))',
               background: 'oklch(var(--c-surface))',
@@ -179,7 +298,7 @@ export function HomePage() {
             <Search size={14} style={{ color: 'oklch(var(--c-fg-muted))' }} />
             <input
               type="text"
-              placeholder="Buscar produtos..."
+              placeholder="Buscar no cardápio…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="bg-transparent flex-1 text-sm outline-none placeholder:text-[oklch(var(--c-fg-muted))]"
@@ -243,64 +362,57 @@ export function HomePage() {
         )}
       </section>
 
-      <section
-        id="sobre"
-        className="py-20 px-6 md:px-12"
-        style={{ background: 'oklch(var(--c-surface-2))' }}
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <p
-            className="text-xs font-semibold tracking-widest uppercase mb-3"
-            style={{ color: 'oklch(var(--c-primary))' }}
-          >
-            NOSSA HISTÓRIA
-          </p>
-          <h2
-            className="text-h2-fluid font-display font-semibold mb-6"
-            style={{ color: 'oklch(var(--c-fg))' }}
-          >
-            Sabores que contam histórias
-          </h2>
-          <p className="text-lg leading-relaxed" style={{ color: 'oklch(var(--c-fg-soft))' }}>
-            Nascida em Petrópolis/RJ, a Delicias Ayumi nasceu do amor pela confeitaria artesanal.
-            Cada receita carrega memórias afetivas e ingredientes cuidadosamente selecionados da
-            nossa querida Serra Fluminense. Trabalhamos com encomendas para garantir que cada
-            produto chegue fresco e perfeito para o seu momento especial.
-          </p>
-        </div>
-      </section>
+      <EncomendaSection />
 
-      <section id="contato" className="py-20 px-6 md:px-12 max-w-7xl mx-auto text-center">
-        <p
-          className="text-xs font-semibold tracking-widest uppercase mb-3"
-          style={{ color: 'oklch(var(--c-primary))' }}
-        >
-          VAMOS CONVERSAR
-        </p>
-        <h2
-          className="text-h2-fluid font-display font-semibold mb-4"
-          style={{ color: 'oklch(var(--c-fg))' }}
-        >
-          Faça sua encomenda
-        </h2>
-        <p className="text-lg mb-8 max-w-lg mx-auto" style={{ color: 'oklch(var(--c-fg-soft))' }}>
-          Entre em contato pelo WhatsApp ou faça seu pedido diretamente pelo site.
-          Atendemos pedidos com 48h de antecedência.
-        </p>
-        <div className="flex flex-wrap gap-3 justify-center">
-          <a
-            href={`https://wa.me/${WA_NUMBER}?text=Olá! Gostaria de fazer uma encomenda.`}
-            target="_blank"
-            rel="noopener noreferrer"
+      <section id="sobre" className="py-20 px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-[1fr_1.1fr] gap-16 items-center">
+          <div
+            className="aspect-[5/6] rounded-[40px] overflow-hidden hidden md:block"
+            style={{ background: 'oklch(var(--c-surface-2))' }}
           >
-            <Button size="lg" variant="primary">
-              <MessageCircle size={18} />
-              WhatsApp
-            </Button>
-          </a>
-          <Button size="lg" variant="ghost" onClick={scrollToMenu}>
-            Ver cardápio
-          </Button>
+            <img
+              src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80"
+              alt="Ayumi no ateliê"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div>
+            <p
+              className="text-xs font-semibold tracking-widest uppercase mb-3"
+              style={{ color: 'oklch(var(--c-primary))' }}
+            >
+              QUEM FAZ
+            </p>
+            <h2
+              className="text-h2-fluid font-display font-semibold mb-4 leading-tight"
+              style={{ color: 'oklch(var(--c-fg))' }}
+            >
+              A receita é da minha avó. O ateliê é meu.
+            </h2>
+            <p className="text-lg leading-relaxed mb-6" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+              Sou a Ayumi. Há alguns anos, transformei a cozinha de casa em ateliê e nunca mais parei.
+              Cada bolo sai daqui assinado por mim — e provado três vezes antes de te entregar.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://instagram.com/delicias_ayumi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost">@delicias_ayumi</Button>
+              </a>
+              <a
+                href={`https://wa.me/${WA_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost">
+                  <MessageCircle size={16} />
+                  (24) 98888-0000
+                </Button>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </>

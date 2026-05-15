@@ -21,7 +21,7 @@ export function Topbar({ showAnnounce = true }: TopbarProps) {
           style={{ background: "oklch(var(--c-primary))", fontSize: "12.5px" }}
         >
           <MapPin size={12} className="inline mr-1.5 -mt-0.5" />
-          Entregas apenas para Petrópolis/RJ · Faça seu pedido com 48h de antecedência
+          Entregamos em toda Petrópolis · Retirada em Corrêas ♡
         </div>
       )}
 
