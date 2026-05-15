@@ -78,16 +78,16 @@ export function StorefrontLayout() {
             </ul>
           </div>
 
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h5 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ opacity: 0.5 }}>
               Contato
             </h5>
-            <ul className="flex flex-col gap-3 text-sm" style={{ opacity: 0.8 }}>
-              <li>{settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}</li>
-              <li>{settings['contato.email']}</li>
-              <li>{settings['contato.endereco']}</li>
-              <li>@{settings['contato.instagram']}</li>
-            </ul>
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-x-6 gap-y-3 text-sm" style={{ opacity: 0.8 }}>
+              <span>{settings['contato.whatsapp'].replace(/^55(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3')}</span>
+              <span>{settings['contato.email']}</span>
+              <span className="col-span-2 md:col-span-1">{settings['contato.endereco']}</span>
+              <span>@{settings['contato.instagram']}</span>
+            </div>
           </div>
         </div>
 
