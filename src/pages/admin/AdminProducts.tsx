@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Plus, Search, Pencil, Trash2 } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { Plus, Search, Pencil, Trash2, ImagePlus, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -22,6 +22,7 @@ const schema = z.object({
   cost_cents: z.coerce.number().min(0),
   stock: z.coerce.number().min(0),
   active: z.boolean().default(true),
+  image_url: z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -54,8 +55,12 @@ export function AdminProducts() {
   const [deleteTarget, setDeleteTarget] = useState<Product | null>(null);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [uploadError, setUploadError] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormData>({
+  const { register, handleSubmit, reset, watch, setValue, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
@@ -76,7 +81,10 @@ export function AdminProducts() {
 
   function openCreate() {
     setEditing(null);
-    reset({ active: true, stock: 0, cost_cents: 0, price_cents: 0 });
+    reset({ active: true, stock: 0, cost_cents: 0, price_cents: 0, image_url: '' });
+    setImageFile(null);
+    setImagePreview('');
+    setUploadError('');
     setModalOpen(true);
   }
 
@@ -91,13 +99,48 @@ export function AdminProducts() {
       cost_cents: p.cost_cents,
       stock: p.stock,
       active: p.active,
+      image_url: p.image_url ?? '',
     });
+    setImageFile(null);
+    setImagePreview(p.image_url ?? '');
+    setUploadError('');
     setModalOpen(true);
+  }
+
+  function handleImagePick(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+    setUploadError('');
+  }
+
+  async function uploadImage(file: File, slug: string): Promise<string> {
+    const ext = file.name.split('.').pop() ?? 'jpg';
+    const path = `${slug}-${Date.now()}.${ext}`;
+    const { error } = await supabase.storage.from('ayumi-products').upload(path, file, { upsert: true });
+    if (error) throw error;
+    const { data } = supabase.storage.from('ayumi-products').getPublicUrl(path);
+    return data.publicUrl;
   }
 
   const onSubmit = async (data: FormData) => {
     setSaving(true);
+    setUploadError('');
     try {
+      const slug = slugify(data.name);
+      let imageUrl = data.image_url ?? '';
+
+      if (imageFile) {
+        try {
+          imageUrl = await uploadImage(imageFile, slug);
+        } catch {
+          setUploadError('Erro ao fazer upload. Verifique se o bucket "ayumi-products" existe no Supabase Storage.');
+          setSaving(false);
+          return;
+        }
+      }
+
       if (editing) {
         await supabase
           .from("ayumi_products")
@@ -110,13 +153,14 @@ export function AdminProducts() {
             cost_cents: data.cost_cents,
             stock: data.stock,
             active: data.active,
-            slug: slugify(data.name),
+            slug,
+            image_url: imageUrl || null,
           })
           .eq("id", editing.id);
       } else {
         await supabase.from("ayumi_products").insert({
           name: data.name,
-          slug: slugify(data.name),
+          slug,
           category: data.category as ProductCategory,
           description: data.description,
           size_label: data.size_label,
@@ -127,6 +171,7 @@ export function AdminProducts() {
           tags: [],
           swatch: [],
           gallery_urls: [],
+          image_url: imageUrl || null,
         });
       }
       setModalOpen(false);
@@ -310,6 +355,47 @@ export function AdminProducts() {
         }
       >
         <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Image picker */}
+          <div className="md:col-span-2">
+            <label className="block text-xs font-semibold mb-2" style={{ color: 'oklch(var(--c-fg-soft))' }}>
+              Imagem do produto
+            </label>
+            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImagePick} />
+            {imagePreview ? (
+              <div className="relative w-full h-48 rounded-xl overflow-hidden border" style={{ borderColor: 'oklch(var(--c-line))' }}>
+                <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                <button
+                  type="button"
+                  onClick={() => { setImageFile(null); setImagePreview(''); setValue('image_url', ''); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+                  className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center"
+                  style={{ background: 'rgba(0,0,0,0.55)' }}
+                >
+                  <X size={14} color="#fff" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="absolute bottom-2 right-2 text-xs px-3 py-1.5 rounded-lg font-medium"
+                  style={{ background: 'rgba(0,0,0,0.55)', color: '#fff' }}
+                >
+                  Trocar
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full h-36 rounded-xl border-2 border-dashed flex flex-col items-center justify-center gap-2 transition-colors hover:border-[oklch(var(--c-primary))]"
+                style={{ borderColor: 'oklch(var(--c-line))', color: 'oklch(var(--c-fg-muted))' }}
+              >
+                <ImagePlus size={24} />
+                <span className="text-sm">Clique para selecionar imagem</span>
+                <span className="text-xs">JPG, PNG, WEBP</span>
+              </button>
+            )}
+            {uploadError && <p className="text-xs mt-1" style={{ color: 'oklch(var(--c-danger))' }}>{uploadError}</p>}
+          </div>
+
           <div className="md:col-span-2">
             <Input label="Nome do produto" error={errors.name?.message} {...register("name")} />
           </div>

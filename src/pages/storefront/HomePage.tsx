@@ -181,7 +181,7 @@ function EncomendaSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             { n: '01', t: 'Escolha', d: 'Monte sua encomenda com pelo menos 48h de antecedência.' },
-            { n: '02', t: 'Pague', d: 'Pix, cartão ou na entrega — tanto faz pra gente.' },
+            { n: '02', t: 'Pague', d: '50% de sinal ao confirmar. Restante na entrega. Pix, cartão ou dinheiro.' },
             { n: '03', t: 'Preparamos', d: 'Tudo feito do zero no nosso ateliê.' },
             { n: '04', t: 'Chega aí', d: 'Entrega em Petrópolis ou retirada no ateliê.' },
           ].map((s) => (
