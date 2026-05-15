@@ -63,7 +63,7 @@ export function StorefrontLayout() {
                 {settings['contato.email']}
               </a>
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings['contato.endereco'])}`}
+                href="https://maps.app.goo.gl/Dkx96vFLqWZYSZbR7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="col-span-2 md:col-span-1 hover:opacity-60 transition-opacity"
