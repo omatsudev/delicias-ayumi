@@ -1,31 +1,31 @@
-import { Link } from "react-router-dom";
-import { Plus } from "lucide-react";
-import type { Product } from "../../domain/types";
-import { ProductImage } from "../ui/ProductImage";
-import { Tag } from "../ui/Tag";
-import { Button } from "../ui/Button";
-import { brl } from "../../lib/utils";
-import { useCartStore } from "../../store/cart";
+import { Link } from 'react-router-dom'
+import { Plus } from 'lucide-react'
+import type { Product } from '@/lib/domain/entities/Product'
+import { ProductImage } from '@/components/ui/ProductImage'
+import { Tag } from '@/components/ui/Tag'
+import { Button } from '@/components/ui/Button'
+import { brl } from '@/lib/utils'
+import { useCartStore } from '@/store/cart'
 
 interface ProductCardProps {
-  product: Product;
+  product: Product
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const addItem = useCartStore((s) => s.addItem);
-  const isOutOfStock = product.stock === 0;
+  const addItem = useCartStore((s) => s.addItem)
+  const isOutOfStock = product.stock === 0
 
   return (
     <div
       className="group rounded-2xl border overflow-hidden transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
       style={{
-        background: "oklch(var(--c-surface))",
-        borderColor: "oklch(var(--c-line-soft))",
+        background: 'oklch(var(--c-surface))',
+        borderColor: 'oklch(var(--c-line-soft))',
       }}
     >
       <Link to={`/produto/${product.slug}`} className="block relative">
         <ProductImage
-          imageUrl={product.image_url}
+          imageUrl={product.imageUrl}
           name={product.name}
           category={product.category}
           swatch={product.swatch}
@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {isOutOfStock && (
           <div
             className="absolute inset-0 flex items-center justify-center"
-            style={{ background: "rgba(0,0,0,0.35)" }}
+            style={{ background: 'rgba(0,0,0,0.35)' }}
           >
             <Tag tone="neutral" className="bg-white/90 text-gray-700 text-sm px-4 py-1.5">
               Esgotado
@@ -53,20 +53,20 @@ export function ProductCard({ product }: ProductCardProps) {
         <Link to={`/produto/${product.slug}`}>
           <h3
             className="font-display text-[22px] font-semibold leading-snug mb-1 hover:text-[oklch(var(--c-primary))] transition-colors"
-            style={{ color: "oklch(var(--c-fg))" }}
+            style={{ color: 'oklch(var(--c-fg))' }}
           >
             {product.name}
           </h3>
         </Link>
-        <p className="text-[13.5px] mb-3" style={{ color: "oklch(var(--c-fg-soft))" }}>
+        <p className="text-[13.5px] mb-3" style={{ color: 'oklch(var(--c-fg-soft))' }}>
           {product.description}
         </p>
         <div className="flex items-center justify-between gap-3">
           <span
             className="font-display text-2xl font-semibold"
-            style={{ color: "oklch(var(--c-fg))" }}
+            style={{ color: 'oklch(var(--c-fg))' }}
           >
-            {brl(product.price_cents)}
+            {brl(product.priceCents)}
           </span>
           <Button
             size="sm"
@@ -81,5 +81,5 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }
