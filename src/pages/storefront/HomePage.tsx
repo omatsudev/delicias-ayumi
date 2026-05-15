@@ -169,8 +169,8 @@ function TrustBand() {
 function EncomendaSection() {
   return (
     <section id="encomendas" className="border-y" style={{ borderColor: 'oklch(var(--c-line-soft))', background: 'oklch(var(--c-surface))' }}>
-      <div className="max-w-7xl mx-auto px-5 md:px-12 py-14 md:py-20">
-        <div className="text-center mb-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-12 py-10 md:py-20">
+        <div className="mb-8 md:text-center">
           <p className="text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: 'oklch(var(--c-primary))' }}>
             COMO FUNCIONA
           </p>
@@ -248,8 +248,8 @@ export function HomePage() {
       <TrustBand />
 
       {/* Cardápio */}
-      <section ref={menuRef} id="menu" className="py-12 md:py-16 px-5 md:px-12 max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+      <section ref={menuRef} id="menu" className="py-10 md:py-16 px-5 md:px-12 max-w-7xl mx-auto">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 md:gap-4 mb-5 md:mb-6">
           <div>
             <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: 'oklch(var(--c-primary))' }}>
               CARDÁPIO
@@ -262,7 +262,7 @@ export function HomePage() {
             </p>
           </div>
           <div
-            className="flex items-center gap-2 rounded-full border px-4 py-2 w-full sm:w-56 shrink-0"
+            className="flex items-center gap-2 rounded-full border px-4 py-2.5 w-full sm:w-56 shrink-0"
             style={{ borderColor: 'oklch(var(--c-line))', background: 'oklch(var(--c-surface))' }}
           >
             <Search size={13} style={{ color: 'oklch(var(--c-fg-muted))' }} />
@@ -325,8 +325,8 @@ export function HomePage() {
       <EncomendaSection />
 
       {/* Sobre */}
-      <section id="sobre" className="py-14 md:py-20 px-5 md:px-12 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-center">
+      <section id="sobre" className="py-10 md:py-20 px-5 md:px-12 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-[1fr_1.1fr] gap-8 md:gap-16 items-center">
           <div
             className="aspect-[5/6] rounded-[32px] overflow-hidden hidden md:block"
             style={{ background: 'oklch(var(--c-surface-2))' }}

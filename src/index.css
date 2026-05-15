@@ -81,4 +81,4 @@ body {
 .font-script   { font-family: "Caveat", Sacramento, cursive; }
 
 .text-h1-fluid { font-size: clamp(46px, 6vw, 84px); }
-.text-h2-fluid { font-size: clamp(32px, 4vw, 56px); }
+.text-h2-fluid { font-size: clamp(24px, 5vw, 56px); }
