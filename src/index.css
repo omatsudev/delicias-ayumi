@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens — Paleta "Ayumi" (padrão) ──────────────────── */
+:root {
+  /* Cores principais */
+  --c-primary:      0.62 0.22 350;
+  --c-primary-soft: 0.94 0.06 350;
+  --c-accent:       0.7 0.14 200;
+  --c-accent-soft:  0.92 0.07 200;
+
+  /* Backgrounds */
+  --c-bg:        0.985 0.018 90;
+  --c-surface:   1 0.008 85;
+  --c-surface-2: 0.95 0.04 350;
+
+  /* Bordas */
+  --c-line:      0.86 0.06 350;
+  --c-line-soft: 0.93 0.03 355;
+
+  /* Texto */
+  --c-fg:       0.28 0.06 350;
+  --c-fg-soft:  0.46 0.06 350;
+  --c-fg-muted: 0.62 0.03 0;
+
+  /* Feedback */
+  --c-danger: 0.55 0.18 25;
+  --c-warn:   0.7 0.14 70;
+
+  /* Espaçamento — densidade regular */
+  --space: 1rem;
+}
+
+/* ── Paleta alternativa: Doceria ──────────────────────────────── */
+[data-palette="doceria"] {
+  --c-primary:      0.60 0.20 30;
+  --c-primary-soft: 0.95 0.06 30;
+  --c-accent:       0.65 0.16 180;
+  --c-accent-soft:  0.92 0.07 180;
+  --c-bg:           0.985 0.018 45;
+  --c-surface:      0.99 0.01 50;
+  --c-surface-2:    0.95 0.04 30;
+  --c-line:         0.86 0.06 30;
+  --c-line-soft:    0.93 0.03 35;
+  --c-fg:           0.25 0.07 30;
+  --c-fg-soft:      0.45 0.06 30;
+}
+
+/* ── Base ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: oklch(var(--c-bg));
+  color: oklch(var(--c-fg));
+  font-family: "Work Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Animações ────────────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.3s ease-out;
+}
+
+/* ── Utilitários customizados ─────────────────────────────────── */
+.font-display  { font-family: "Cormorant Garamond", Georgia, serif; }
+.font-script   { font-family: "Caveat", Sacramento, cursive; }
+
+.text-h1-fluid { font-size: clamp(46px, 6vw, 84px); }
+.text-h2-fluid { font-size: clamp(32px, 4vw, 56px); }

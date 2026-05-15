@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Delicias Ayumi · Bolos, tortas e empadões artesanais · Petrópolis</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Sacramento&family=Caveat:wght@400;500;600;700&family=Pacifico&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* ── DESIGN TOKENS ───────────────────────────────────────────── */
+  :root{
+    --c-bg:        oklch(0.972 0.012 75);
+    --c-surface:   oklch(0.985 0.008 80);
+    --c-surface-2: oklch(0.945 0.014 75);
+    --c-line:      oklch(0.88 0.018 70);
+    --c-line-soft: oklch(0.93 0.014 72);
+    --c-fg:        oklch(0.25 0.022 50);
+    --c-fg-soft:   oklch(0.45 0.02 55);
+    --c-fg-muted:  oklch(0.62 0.018 60);
+    --c-primary:   oklch(0.55 0.14 35);
+    --c-primary-2: oklch(0.45 0.13 32);
+    --c-primary-soft: oklch(0.93 0.04 50);
+    --c-accent:    oklch(0.6 0.09 145);
+    --c-accent-soft: oklch(0.93 0.04 145);
+    --c-warn:      oklch(0.7 0.14 70);
+    --c-danger:    oklch(0.55 0.18 25);
+    --c-danger-soft: oklch(0.94 0.04 25);
+
+    --font-display: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+    --font-script:  "Caveat", "Sacramento", cursive;
+    --font-ui:      "Work Sans", "DM Sans", -apple-system, system-ui, sans-serif;
+    --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+    --r-xs: 4px;
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 18px;
+    --r-xl: 28px;
+    --r-2xl: 40px;
+
+    --space: 1;
+    --shadow-sm: 0 1px 2px oklch(0.25 0.02 50 / 0.06), 0 1px 1px oklch(0.25 0.02 50 / 0.04);
+    --shadow-md: 0 6px 16px -6px oklch(0.25 0.02 50 / 0.12), 0 2px 4px oklch(0.25 0.02 50 / 0.05);
+    --shadow-lg: 0 24px 48px -16px oklch(0.25 0.02 50 / 0.18), 0 8px 16px -8px oklch(0.25 0.02 50 / 0.08);
+  }
+
+  /* Dark mode */
+  html[data-dark="true"]{
+    --c-bg:        oklch(0.18 0.012 55);
+    --c-surface:   oklch(0.22 0.014 55);
+    --c-surface-2: oklch(0.26 0.014 55);
+    --c-line:      oklch(0.32 0.016 55);
+    --c-line-soft: oklch(0.28 0.014 55);
+    --c-fg:        oklch(0.96 0.01 75);
+    --c-fg-soft:   oklch(0.82 0.014 70);
+    --c-fg-muted:  oklch(0.62 0.018 60);
+    --c-primary:   oklch(0.7 0.14 38);
+    --c-primary-2: oklch(0.78 0.12 40);
+    --c-primary-soft: oklch(0.32 0.06 35);
+    --c-accent-soft: oklch(0.3 0.05 145);
+    --c-danger-soft: oklch(0.3 0.06 25);
+    --shadow-sm: 0 1px 2px #000a;
+    --shadow-md: 0 6px 16px -6px #000a, 0 2px 4px #0006;
+    --shadow-lg: 0 24px 48px -16px #000c, 0 8px 16px -8px #0008;
+  }
+
+  /* Density */
+  html[data-density="compact"]  { --space: 0.78; }
+  html[data-density="regular"]  { --space: 1; }
+  html[data-density="comfy"]    { --space: 1.22; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body{
+    background: var(--c-bg);
+    color: var(--c-fg);
+    font-family: var(--font-ui);
+    font-feature-settings: "ss01", "ss02", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+  }
+  button{ font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  input, select, textarea { font: inherit; color: inherit; }
+  a { color: inherit; }
+  ::selection { background: var(--c-primary); color: #fff; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--c-line); border-radius: 8px; border: 3px solid var(--c-bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--c-fg-muted); }
+
+  /* utility-ish */
+  .serif { font-family: var(--font-display); letter-spacing: -0.01em; }
+  .mono  { font-family: var(--font-mono); }
+  .muted { color: var(--c-fg-muted); }
+  .soft  { color: var(--c-fg-soft); }
+
+  /* Layout for the whole app */
+  #app { min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 1; }
+
+  /* Subtle decorative background — gingham + dots, very low opacity */
+  body::before{
+    content: "";
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(circle at 18% 14%, var(--c-primary-soft), transparent 38%),
+      radial-gradient(circle at 84% 78%, var(--c-accent-soft), transparent 42%),
+      radial-gradient(var(--c-primary) 0.6px, transparent 0.7px);
+    background-size: auto, auto, 22px 22px;
+    background-position: 0 0, 0 0, 0 0;
+    opacity: 0.55;
+  }
+  html[data-dark="true"] body::before{
+    opacity: 0.25;
+  }
+
+  /* Decorative scallop border generator */
+  .scallop-divider{
+    --scallop: 14px;
+    height: var(--scallop);
+    background:
+      radial-gradient(circle at 50% 0%, var(--c-primary) calc(var(--scallop) / 2 - 0.5px), transparent calc(var(--scallop) / 2));
+    background-size: calc(var(--scallop) * 2) var(--scallop);
+    background-repeat: repeat-x;
+  }
+
+  /* Reusable placeholder for product imagery (stylized stripes) */
+  .ph-img{
+    position: relative;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        oklch(0.55 0.14 35 / 0.08) 0 14px,
+        oklch(0.55 0.14 35 / 0.05) 14px 28px
+      ),
+      var(--c-surface-2);
+    color: var(--c-fg-soft);
+    overflow: hidden;
+  }
+  .ph-img .ph-label{
+    position:absolute; left:12px; bottom:10px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--c-fg-muted);
+    background: var(--c-surface); padding: 4px 7px; border-radius: 4px;
+    border: 1px solid var(--c-line-soft);
+  }
+
+  /* Smooth fades for view switches */
+  .view-fade { animation: vFade .35s ease both; }
+  @keyframes vFade { from{transform: translateY(4px);} to{transform:none;} }
+
+  /* Hide while React mounts to avoid FOUC */
+  #app:empty::before{
+    content: "Delicias Ayumi";
+    display: block; padding: 40vh 0 0; text-align: center;
+    font-family: var(--font-display); font-size: 32px; color: var(--c-fg-soft);
+  }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- React + Babel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- App scripts (order matters) -->
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="data.jsx"></script>
+  <script type="text/babel" src="ui.jsx"></script>
+  <script type="text/babel" src="storefront.jsx"></script>
+  <script type="text/babel" src="admin.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
